@@ -1,0 +1,51 @@
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Models (large files)
+models/**/*.gguf
+models/**/*.onnx
+models/**/*.bin
+models/**/*.safetensors
+
+# Local provider experiments can contain vendored credentials or local env files.
+providers/
+
+# Keep model directories but ignore contents
+!models/llm/.gitkeep
+!models/stt/.gitkeep
+!models/tts/.gitkeep
+
+# Test outputs
+tests/output/
+*.wav
+*.mp3
+!tests/fixtures/*.mp3
+
+# Local speech runtime downloads
+tools/whisper.cpp/
+runtime/whisper.cpp/
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+__pycache__/
+*.pyc
+
+# Trash folder (old/experimental code)
+trash/

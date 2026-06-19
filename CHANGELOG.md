@@ -1,0 +1,318 @@
+# Changelog
+
+## Unreleased
+
+- Tightened DX/Zed voice handoff honesty: execution handoffs now distinguish declared artifact contracts from real artifact readiness, route visuals warn until screenshots exist, desktop voice readiness is labeled as entrypoint-file tracking, dashboard export copy no longer says "ready at 100" when warnings exist, and voice docs now keep live Zed microphone, Nemotron, and audible Kokoro proof unclaimed until governed validation reruns.
+- Added a June 6 DX/Zed dictation-host handoff covering `flow-dictate`, Parakeet default STT, Nemotron and Whisper Tiny GGML opt-in paths, Whisper binary/model/language flag and env aliases, and the remaining unclaimed Nemotron, Whisper, live microphone, and Kokoro playback proofs.
+- Added a Whisper Tiny GGML installer that fetches the ignored local whisper.cpp CPU x64 runtime and `ggml-tiny.bin`, normalizes nested release zip layouts into Flow's default binary path, and reports Whisper readiness in `flow-voice-status.ps1`.
+- Passed a direct copied-Flow Whisper file smoke through `flow-dictate --file G:\Temp\UserTemp\zed-flow-mic-proof\flow-mic-capture.wav --model whisper-tiny-ggml`, loading the installed default artifacts and returning `[stt] "(coughs)"`; live Zed composer proof remains separate.
+- Added May 22 launch notes for token/RLM/serializer workers and Zed-facing receipt contracts.
+- completed Friday Release Learning Register at 100/100 with typed local-only learning records, lesson/prevention-experiment/decision-pattern/quality-gate/owner-commitment/retired-learning categories, append/list/export/JSON commands, dashboard import/rendering, copyable next-cycle commitments, repeated lesson and owner commitment summaries, and focused Rust/TypeScript coverage
+- opened Friday Release Knowledge Index as the next set for making release learning searchable, filterable, and comparable across local release cycles
+- completed Friday Release Continuity Journal at 100/100 with typed local-only continuity entries, outcome/carryover/blocker-pattern/next-release-note/operator-decision/superseded-history kinds, append/list/export/JSON commands, dashboard import/rendering, copyable next-release notes, recurring blocker and carryover summaries, and focused Rust/TypeScript coverage
+- opened Friday Release Learning Register as the next set for converting continuity journals into prevention lessons, decision patterns, quality gates, owner commitments, and next-cycle learning history
+- completed Friday Release Closure Ledger at 100/100 with typed local-only closure records, draft/closed/held/carryover/blocked/revoked/superseded states, append/list/export/JSON commands, dashboard import/rendering, copyable closure summaries, no-fetch/no-send safety copy, and focused Rust/TypeScript coverage
+- opened Friday Release Continuity Journal as the next set for connecting closure ledgers into historical release outcomes, recurring blockers, carryover commitments, and next-release planning notes
+- completed Friday Release Receipt Review Board at 100/100 with typed local-only review boards, verified/held/missing/stale/blocked/revoked/carryover decisions, CLI/JSON commands, dashboard import/rendering, copyable review notes, no-fetch/no-send safety copy, and focused Rust/TypeScript coverage
+- opened Friday Release Closure Ledger as the next set for preserving reviewed receipt outcomes, operator closure notes, carryover commitments, and final local release history
+- completed Friday Release External Receipt Archive at 100/100 with typed local-only receipt archives, draft/attached/verified/stale/missing/revoked/superseded/blocked states, append/list/export/JSON commands, dashboard import/rendering, operator-owned evidence paths, no-fetch/no-send audit notes, and focused Rust/TypeScript coverage
+- opened Friday Release Receipt Review Board as the next set for consolidating outbound reviews, receipt archives, freshness warnings, blocker carryover, and operator final decisions
+- completed Friday Release Outbound Review at 100/100 with typed local-only outbound review ledgers, draft/reviewed/changes-requested/held/blocked/manually-published/revoked/superseded states, append/list/export/JSON commands, dashboard import/rendering, copy-safe review counts, no-external-mutation notes, and focused Rust/TypeScript coverage
+- opened Friday Release External Receipt Archive as the next set for preserving human-owned publication, send, deploy, upload, or announcement receipts as local evidence without fetching or mutating external systems
+- completed Friday Release Publication Control at 100/100 with typed local-only publication controls, draft/ready/held/blocked/published-manually/revoked/superseded states, CLI/JSON commands, release notes/deployment notes/announcement/send-instruction copy, dashboard import/rendering, blocker-safe readiness, and focused Rust/TypeScript coverage
+- opened Friday Release Outbound Review as the next set for final operator review of copied release notes, deployment notes, announcements, and manual-publication references without external mutation
+- completed Friday Release Handoff Completion Ledger at 100/100 with typed local-only completion ledgers, draft/completed/manually-sent/held/revoked/superseded/blocked states, append/list/export/JSON commands, blocked-governance safety downgrades, dashboard import/rendering, copyable completion summaries, and focused Rust/TypeScript coverage
+- opened Friday Release Publication Control as the next set for preparing release notes, deployment notes, announcements, and external-send instructions without publishing or mutating external systems
+- completed Friday Release Handoff Dispatch Governance at 100/100 with typed local-only dispatch governance reviews, approved/held/needs-final-decision/stale-checklist/revoked-active-decision/blocked-carryover states, non-sending CLI/JSON commands, dashboard import/rendering, copyable governance notes, and focused Rust/TypeScript coverage
+- opened Friday Release Handoff Completion Ledger as the next set for preserving governed handoff outcomes without external mutation
+- completed Friday Release Handoff Dispatch Audit at 100/100 with typed local-only dispatch audit trails, draft/ready/held/approved/sent-manually/revoked/blocked states, append/list/export/JSON commands, dashboard import/rendering, copyable dispatch audit summaries, and focused Rust/TypeScript coverage
+- opened Friday Release Handoff Dispatch Governance as the next set for validating dispatch audit trails before any external handoff is considered complete
+- completed Friday Release Handoff Dispatch Checklist at 100/100 with typed local-only dispatch checklist generation, ready/held/missing-recipient/missing-attachment/privacy-review/blocked states, non-sending CLI/JSON commands, dashboard import/rendering, copyable dispatch checklist text, and focused Rust/TypeScript coverage
+- opened Friday Release Handoff Dispatch Audit as the next set for preserving dispatch checklist history and operator final decisions before any external send
+- completed Friday Release Handoff Governance Review at 100/100 with typed local-only governance reviews, approved/held/needs-acknowledgement/stale-active-packet/blocked-carryover states, non-sending CLI/JSON commands, dashboard import/rendering, copyable governance notes, and focused Rust/TypeScript coverage
+- opened Friday Release Handoff Dispatch Checklist as the next set for converting approved governance reviews into final local operator checklists before any external send
+- completed Friday Release Handoff Audit Trail at 100/100 with typed local-only packet history, draft/ready/sent/superseded/revoked/blocked states, append/list/export/JSON commands, dashboard import/rendering, copyable audit summary, and focused Rust/TypeScript coverage
+- opened Friday Release Handoff Governance Review as the next set for validating audit trails before any release note, public handoff, deployment note, or external send
+- completed Friday Release Handoff Packet at 100/100 with typed local-only handoff packets, operator summary/attachable-file/inline-note/unresolved-blocker/checksum sections, non-uploading CLI/JSON commands, dashboard import/rendering, copyable handoff packet and file checklist text, and focused Rust/TypeScript coverage
+- opened Friday Release Handoff Audit Trail as the next set for preserving draft, ready, sent, superseded, revoked, and blocked handoff packet history without external mutation
+- completed Friday Release Evidence Attachment Review at 100/100 with typed local-only attachment readiness, ready/missing/inline-only/checksum-missing/blocked states, non-uploading CLI/JSON commands, dashboard import/rendering, copyable handoff notes, and focused Rust/TypeScript coverage
+- opened Friday Release Handoff Packet as the next set for assembling attachment reviews into final local operator handoff packets
+- completed Friday Release Checkpoint Evidence Vault at 100/100 with typed local-only checkpoint evidence manifests, review/signoff/acknowledgement/carryover/release-note entries, checksum tracking, non-executing CLI/JSON commands, dashboard import/rendering, copyable attachment notes, and focused Rust/TypeScript coverage
+- opened Friday Release Evidence Attachment Review as the next set for verifying attachability and handoff readiness before any release note, deployment note, or external handoff
+- completed Friday Release Checkpoint Signoff Ledger at 100/100 with typed local-only signoff history, signed-off/held/carried-over/superseded/revoked states, operator reason capture, non-executing append/list/export CLI commands, dashboard import/rendering, copyable release notes, and focused Rust/TypeScript coverage
+- opened Friday Release Checkpoint Evidence Vault as the next set for packaging checkpoint reviews, signoff ledgers, acknowledgement evidence, carryover commitments, and release notes into one local evidence bundle
+- completed Friday Release Checkpoint Review Board at 100/100 with typed local-only checkpoint decisions, readiness/hold/carryover/review states, non-executing CLI/JSON commands, dashboard import/rendering, copyable review notes, and focused Rust/TypeScript coverage
+- opened Friday Release Checkpoint Signoff Ledger as the next set for preserving checkpoint decisions, operator signoffs, acknowledgement evidence, and carryover commitments
+- completed Friday Release Escalation Ledger at 100/100 with typed local-only escalation history, owner responses, acknowledgement and release-gate outcomes, append/list/export CLI commands, dashboard import/rendering, copyable owner response text, and focused Rust/TypeScript coverage
+- opened Friday Release Checkpoint Review Board as the next set for consolidating escalation ledgers, SLA monitors, owner follow-ups, prevention evidence, and stability artifacts into a signed checkpoint decision surface
+- completed Friday Release Evidence SLA Monitor at 100/100 with typed local-only SLA requirements, freshness/due/escalation/acknowledgement states, non-executing CLI/JSON commands, dashboard import/rendering, copyable escalation text, and focused Rust/TypeScript coverage
+- opened Friday Release Escalation Ledger as the next set for preserving SLA escalations, owner responses, acknowledgement decisions, release-gate outcomes, and checkpoint carryover
+- completed Friday Release Owner Follow-up Board at 100/100 with typed local-only owner assignments, due windows, evidence requests, completion states, non-executing CLI/JSON commands, dashboard import/rendering, copyable assignment text, and focused Rust/TypeScript coverage
+- opened Friday Release Evidence SLA Monitor as the next set for watching owner follow-up records, prevention-plan evidence, stability artifacts, freshness windows, and escalation-ready blockers
+- completed Friday Release Prevention Planner at 100/100 with typed local-only prevention plans, recurrence detection, release-gate blockers, owner-ready actions, non-executing CLI/JSON commands, dashboard import/rendering, copyable owner text, and focused Rust/TypeScript coverage
+- opened Friday Release Owner Follow-up Board as the next set for turning prevention actions into owner assignments, due windows, evidence requests, and completion gates
+- completed Friday Release Incident Archive at 100/100 with typed local-only incident history, severity/outcome/follow-up/prevention taxonomies, append/list/export CLI commands, dashboard import/rendering, copyable follow-up actions, and focused Rust/TypeScript coverage
+- opened Friday Release Prevention Planner as the next set for turning incident history into recurrence detection, owner-ready prevention actions, and release-blocking evidence gates
+- completed Friday Release Recovery Runbook at 100/100 with typed local-only recovery reports, pause/diagnose/rollback/verify/resume/follow-up phases, explicit approval gates, non-executing CLI/JSON commands, dashboard import/rendering, copyable recovery commands, and focused Rust/TypeScript coverage
+- opened Friday Release Incident Archive as the next set for preserving recovery runbooks, incident notes, stability snapshots, rollback drills, and operator outcomes as searchable local release history
+- completed Friday Release Rollback Drill at 100/100 with typed local-only dry-run reports, rollback readiness checks, stale monitor and post-promotion blocker detection, CLI/JSON generation commands, dashboard rendering, dry-run command copy, and focused Rust/TypeScript coverage
+- opened Friday Release Stability Evidence Board as the next set for consolidating release QA, candidate archive, promotion ledger, post-promotion monitor, rollback drill, and deployment gate evidence into one operator-facing stability surface
+- advanced Friday Release Stability Evidence Board to 60/100 with a typed consolidated stability board, deployment/QA/regression/promotion/freshness/recovery scoring categories, CLI/JSON generation commands, and focused Rust coverage
+- completed Friday Release Stability Evidence Board at 100/100 with dashboard import/rendering, stability score cards, active risk lists, evidence links, copyable board commands, and TypeScript smoke coverage
+- opened Friday Release Recovery Runbook as the next set for turning blocked release evidence into local-only pause, diagnose, rollback, verify, resume, and incident follow-up guidance
+- completed Friday Release Deployment Gate at 100/100 with typed local-first go/no-go reports, no-deploy reason categories, target policy checks, CLI/JSON generation commands, dashboard import/rendering, rollback/deploy checklist copy, and focused Rust/TypeScript coverage
+- opened Friday Release Candidate Archive as the next set for preserving comparable deployment gates, evidence kits, target metadata, and rollback notes across major checkpoints
+- advanced Friday Release Candidate Archive to 60/100 with typed candidate archive records, deployment-gate/evidence-kit preservation, candidate diff summaries, and CLI/JSON append/preview commands
+- completed Friday Release Candidate Archive at 100/100 with dashboard archive import/rendering, latest-candidate status, regression summaries, archive command copy, and TypeScript smoke coverage
+- opened Friday Release Promotion Ledger as the next set for auditable candidate promotion, deployment notes, rollback references, and post-promotion checks
+- completed Friday Release Promotion Ledger at 100/100 with typed promotion records, promoted/held/rolled-back/superseded/abandoned decisions, local CLI/JSON recording commands, dashboard ledger rendering, active rollback copy, post-promotion checks, and focused Rust/TypeScript coverage
+- opened Friday Release Post-Promotion Monitor as the next set for verification freshness, incident notes, rollback readiness, and follow-up checks after candidate promotion
+- completed Friday Release Post-Promotion Monitor at 100/100 with typed monitor reports, stale/missing post-promotion evidence warnings, local CLI/JSON generation commands, dashboard monitor rendering, incident-note evidence, rollback readiness copy, and focused Rust/TypeScript coverage
+- opened Friday Release Rollback Drill as the next set for local-only rollback readiness reports, blocked rollback reasons, dry-run commands, and dashboard rollback drill rendering
+- completed Friday Release Evidence Export Kit at 100/100 with local-only evidence manifests, SHA-256 checksums, stale/missing warnings, export-kit CLI/JSON commands, dashboard import/rendering, operator attachment copy, and focused Rust/TypeScript coverage
+- opened Friday Release Deployment Gate as the next set for an explicit local-first go/no-go surface before major Friday checkpoints
+- completed Friday Release QA Command Center at 100/100 with dashboard QA import/rendering, stale-result badges, copyable lightweight-check commands, and TypeScript smoke coverage
+- opened Friday Release Evidence Export Kit as the next set for one local-only release-review bundle with manifests, checksums, signoffs, QA outputs, and dashboard guidance
+- advanced Friday Release QA Command Center to 80/100 with a typed local QA report, lightweight check-result inputs, copyable check commands, CLI/JSON report commands, and focused Rust coverage
+- completed Friday Release Operator Checklist at 100/100 with typed local release checklists, package/timeline/TODO/changelog/readiness blockers, checklist/signoff CLI commands, dashboard signoff controls, and focused Rust/TypeScript coverage
+- opened Friday Release QA Command Center as the next set for one local-first surface that summarizes lightweight checks, checklist/package/timeline status, stale results, and copyable verification commands
+- completed Friday Trusted Runner Evidence Timeline at 100/100 with typed package history, package-to-package diff/regression summaries, local-only archive/timeline CLI commands, dashboard timeline import rendering, and focused Rust/TypeScript coverage
+- opened Friday Release Operator Checklist as the next set for evidence-backed release signoff, blocker categorization, local audit history, and dashboard review controls
+- completed Friday Trusted Runner Release Package at 100/100 with a signed local-only evidence manifest, history/live-state/release-review merging, incident markdown, CLI/JSON generation commands, dashboard package import rendering, and focused Rust/TypeScript coverage
+- opened Friday Trusted Runner Evidence Timeline as the next set for package history, diff warnings, archive commands, dashboard comparison, and freshness review
+- completed Friday Trusted Runner Operator Review at 100/100 with typed status/action/time-window filters, release-gate summaries, export-ready incident notes, dashboard review rendering, CLI/JSON review commands, and focused Rust/TypeScript coverage
+- opened Friday Trusted Runner Release Package as the next set for signed local release handoffs, manifest checksums, package rendering, and stale evidence warnings
+- completed Friday Desktop Runner Cancellation UX at 100/100 with typed cancellation/recovery controls, active cancel commands, stale cleanup/retry guidance, denial recovery copy, dashboard-side persisted operator reasons, CLI/JSON cancellation UX reports, and focused Rust/TypeScript coverage
+- opened Friday Trusted Runner Operator Review as the next set for filterable audit history, release-gate summaries, incident notes, and dashboard review controls
+- completed Friday Desktop Runner Bridge at 100/100 with pending/running/finished bridge events, live-state writes around execution, cancellation-token plumbing, bridge JSON import guidance, CLI/JSON bridge runner commands, and focused cancellation-boundary tests
+- opened Friday Desktop Runner Cancellation UX as the next set for visible cancellation, stale cleanup, retry, and denial recovery controls
+- completed Friday Live Runner State at 100/100 with typed pending/running/finished/stale live records, local state read/write commands, dashboard live-state rendering, stale recovery copy, and focused Rust/TypeScript coverage
+- opened Friday Desktop Runner Bridge as the next set for real desktop-host state emission during approved local command execution
+- completed Friday Runner Approval UI at 100/100 with a typed approval modal contract, keyboard-accessible approve/deny/copy/retry/cancel/snooze/undo controls, persisted operator audit reasons, visible dashboard approval handling, smoke coverage, and release-review links
+- opened Friday Live Runner State as the next set for live pending/running/finished runner state instead of stale-import-only dashboard updates
+- completed Friday Dashboard Runner UX at 100/100 with grouped trusted runner history summaries, retry/copy/cancel affordances, clear timeout/cancellation copy, dashboard UX import rendering, smoke coverage, and release-review notes
+- opened Friday Runner Approval UI as the next set for native approve, deny, retry, copy, cancel, and audit-reason interactions
+- completed Friday Trusted Host Runner at 100/100 with an approved-only bounded runner, timeout/cancellation/output limits, trusted runner history persistence, CLI/JSON runner commands, dashboard runner-result import, and focused runner tests
+- opened Friday Dashboard Runner UX as the next set for clearer runner history, retry, cancellation, and release-review UX
+- completed Friday Dashboard Host Command Bridge at 100/100 with a trusted host command bridge report, approval-required records, audit summaries, blocked command checks, CLI/JSON commands, and dashboard host-bridge JSON import
+- opened Friday Trusted Host Runner as the next set for bounded approved desktop/Tauri command execution
+- completed Friday Dashboard Command Execution at 100/100 with a typed local dashboard command dispatcher, permission-aware handoffs, persisted recent results, and visible command result rendering
+- opened Friday Dashboard Host Command Bridge as the next set so trusted desktop execution can be added without silent background commands
+- added an active completion-control loop to `TODO.md` with a conservative 75/100 score for the current feature set
+- added `flow --completion`, `flow --progress`, and `flow --next-100` for a CLI-visible current set, evidence, and next actions
+- added `flow --completion-json`, `flow --progress-json`, and `flow --next-100-json` for machine-readable completion status
+- added completion-loop status to release summaries and exported release handoff data
+- added `TODO.md` and `CHANGELOG.md` snapshots to exported production bundles
+- added completion-loop guardrail tests so planned items cannot accidentally score as 100/100
+- checkpointed the local model verification policy before starting the new completion loop
+- completed the Completion Control Loop and opened Host Autonomy Core at 25/100
+- added host automation audit records for selection-read and selection-replacement flows
+- added `flow --accessibility [os] [--dry-run]` for host automation readiness diagnostics
+- advanced Host Autonomy Core to 50/100
+- added host pause, snooze, resume, and pause-refresh controls for always-on runtimes
+- advanced Host Autonomy Core to 70/100
+- added compact persisted host audit records plus `flow --audit-log <state-file> [limit]` for operator review
+- advanced Host Autonomy Core to 80/100
+- added a checked host dictation path that coordinates lifecycle, overlay, microphone/capture readiness, accessibility, dictation cleanup, focused-input replacement, and audit logging
+- completed Host Autonomy Core at 100/100
+- opened Writing Quality Core as the next active 100-point product loop
+- added structured writing-change explanations for typing assistance and text commands, covering grammar, tone, concision, terminology, snippets, domain rules, style rules, and formatting
+- advanced Writing Quality Core to 30/100
+- added local-first academic review reports for citation needs, claim review, fact-check risk, supplied-source matching, and source-overlap warnings
+- advanced Writing Quality Core to 55/100
+- paused Writing Quality Core so the active loop can follow the Friday competitive AI workspace pivot
+- added a Friday capability map covering ChatGPT, Gemini, Perplexity, Grok, and Claude feature targets
+- added Friday workspace view definitions for Ask, Search, Research, Agents, Canvas, Projects, Memory, Connectors, Voice, Artifacts, Automations, Code, and Multimodal
+- added metasearch-first Friday answer-search and deep-research plans that explicitly forbid Perplexity Computer as a dependency
+- added `flow --friday`, `flow --friday-json`, `flow --friday-search`, and `flow --friday-research`
+- opened Friday Competitive AI Workspace at 39/100
+- added a Friday Research workflow contract with metasearch execution targets, stage states, and export formats
+- added a local metasearch API client path plus `flow --friday-metasearch` / `flow --friday-metasearch-json`
+- added Friday source-group, citation-ledger, and markdown-report records plus `flow --friday-research-report`
+- added persisted Friday research bundles with report, citations, source groups, progress events, manifest files, and `flow --friday-research-report-save`
+- added local-first Friday research synthesis prompts, citation-aware answer deltas, and `flow --friday-research-synthesize`
+- added `flow --friday-research-workflow` and `flow --friday-research-workflow-json`
+- advanced Friday Competitive AI Workspace to 47/100
+- advanced Friday Competitive AI Workspace to 51/100
+- advanced Friday Competitive AI Workspace to 59/100
+- added durable Friday Projects, Memory, and Connectors workspace stores with separate JSON persistence, permission findings, and CLI export commands
+- advanced Friday Competitive AI Workspace to 72/100
+- added durable Friday Canvas, Artifacts, and Code checkpoint stores with preview runners, diffs, and code-task records
+- advanced Friday Competitive AI Workspace to 86/100
+- added durable Friday Voice, Multimodal, and Automation runtime stores for STT/TTS/wake, OCR/VLM planning, scheduled jobs, approvals, and audit files
+- completed Friday Competitive AI Workspace at 100/100 and opened Friday Product UI Integration as the next loop
+- added Friday Ask/Search/Research UI integration route contracts with streaming flags, citations, source controls, saved report bindings, and CLI visibility
+- advanced Friday Product UI Integration to 20/100
+- added store-backed Friday page contracts for Projects, Memory, Connectors, Agents, Canvas, Artifacts, Code, Voice, Multimodal, and Automations
+- advanced Friday Product UI Integration to 45/100
+- added `flow --friday-local-checks` / `--friday-local-checks-json` for low-resource STT, TTS, OCR, metasearch, artifact preview, and runtime readiness checks
+- advanced Friday Product UI Integration to 65/100
+- added production-ready Friday route state contracts with tone, visibility, blocking behavior, and recovery commands for every route
+- advanced Friday Product UI Integration to 85/100
+- added `flow --friday-browser-gate` / `--friday-browser-gate-json` for browser-extension verification and major-feature deploy gating
+- completed Friday Product UI Integration at 100/100
+- opened Multimodal Local Core at 20/100
+- added `flow --friday-ocr-smoke` / `--friday-ocr-smoke-json` for bounded OCR fixture or explicit model smoke runs that write markdown, artifact, checkpoint, and report records
+- advanced Multimodal Local Core to 40/100
+- added `flow --friday-vlm-contract` / `--friday-vlm-contract-json` for local-only screenshot understanding contracts with explicit VLM model files, artifact, checkpoint, and missing-model findings
+- advanced Multimodal Local Core to 60/100
+- added `flow --friday-multimodal-route` / `--friday-multimodal-route-json` for local-first OCR, VLM, audio, image, and video routing policy with explicit remote allowance and resident-load boundaries
+- advanced Multimodal Local Core to 80/100
+- added publish-ready multimodal artifact metadata sidecars for OCR and VLM outputs, including source, request kind, model, prompt, local-only flag, execution flag, timing, confidence, and JSON round-trip coverage
+- completed Multimodal Local Core at 100/100 and listed Multimodal Product Execution as the next candidate loop
+- opened Multimodal Product Execution at 20/100
+- added `flow --friday-multimodal-diagnostics` / `--friday-multimodal-diagnostics-json` to connect OCR smoke reports, VLM contracts, routing policy, and metadata sidecars to the Multimodal UI contract
+- added `flow --friday-screenshot-vlm` / `--friday-screenshot-vlm-json` to validate local screenshot files, write source metadata, and feed the VLM contract without loading the model
+- advanced Multimodal Product Execution to 40/100
+- added `flow --friday-media-affordances` / `--friday-media-affordances-json` for explicit local-only image/video model keys, repos, install inspection commands, run planning commands, and resident-load policy
+- advanced Multimodal Product Execution to 60/100
+- added `flow --friday-artifacts-index-multimodal` / `--friday-artifacts-index-multimodal-json` to import OCR/VLM artifact, checkpoint, and metadata sidecars into the durable Friday artifact store
+- advanced Multimodal Product Execution to 80/100
+- added `flow --friday-multimodal-visual-check` / `--friday-multimodal-visual-check-json` to verify the Multimodal route contract, diagnostics, artifact metadata rail, media actions, production states, and responsive viewport targets without loading OCR/VLM models
+- completed Multimodal Product Execution at 100/100
+- opened Browser And Extension Core at 20/100
+- added `flow --browser-extension-smoke` / `--browser-extension-smoke-json` for local-only packaged extension smoke readiness across Chrome, Edge, Firefox, and Safari targets, including dist files, zip/checksum artifacts, browser executable detection, and launch hints
+- added `flow --browser-extension-launch-smoke` / `--browser-extension-launch-smoke-json` with optional `--execute` for bounded temporary-profile launch smoke on installed Chromium-family browser targets
+- advanced Browser And Extension Core to 40/100
+- added `flow --browser-pack-reuse-smoke` / `--browser-pack-reuse-smoke-json` to simulate cached browser packs and verify offline local-only routing through browserpack-local URLs with remote fallback disabled
+- advanced Browser And Extension Core to 60/100
+- added `flow --browser-pack-recovery-smoke` / `--browser-pack-recovery-smoke-json` to verify partial-download resume, corrupt-hash rejection, and quota-pressure recovery contracts for browser packs
+- advanced Browser And Extension Core to 80/100
+- added `flow --browser-webllm-acceleration` / `--browser-webllm-acceleration-json` to verify an opt-in Chromium/WebGPU WebLLM worker path for the Qwen text pack while preserving Transformers.js fallback and non-Chromium guardrails
+- completed Browser And Extension Core at 100/100
+- opened Friday Live UI Execution at 20/100
+- added `flow --friday-live-ui-routes` / `--friday-live-ui-routes-json` to verify Friday route contracts are bound to tracked desktop, web, and browser-extension UI/runtime files
+- added `flow --friday-readiness` / `--friday-readiness-json` for a local-only operator summary of route, model, browser, desktop host, multimodal, media, and release-loop readiness
+- advanced Friday Live UI Execution to 40/100
+- added `flow --friday-route-visuals` / `--friday-route-visuals-json` for Ask, Search, Research, Voice, and Multimodal screenshot target verification across desktop/mobile viewports
+- advanced Friday Live UI Execution to 60/100
+- added `flow --friday-execution-handoffs` / `--friday-execution-handoffs-json` to bind live UI actions to local commands, permission scopes, artifact paths, source files, and recovery commands
+- advanced Friday Live UI Execution to 80/100
+- added `flow --friday-dashboard-export` / `--friday-dashboard-export-json` to write dashboard-ready readiness, route binding, route visual, execution handoff, completion, manifest, index, and markdown summary files
+- completed Friday Live UI Execution at 100/100 and listed Friday Dashboard Runtime Wiring as the next candidate loop
+- opened Friday Dashboard Runtime Wiring at 20/100
+- added `flow --friday-dashboard-panel` / `--friday-dashboard-panel-json` to load exported readiness bundles into typed dashboard cards and safe UI actions
+- advanced Friday Dashboard Runtime Wiring to 40/100
+- added dashboard screenshot history records with captured/missing/metadata-missing states and per-route capture prompts for top Friday routes
+- added typed Friday dashboard actions for local open, run-check, recover, and capture controls from readiness cards
+- advanced Friday Dashboard Runtime Wiring to 60/100
+- added persisted Friday dashboard export history with latest/previous checkpoint records and score/readiness deltas
+- advanced Friday Dashboard Runtime Wiring to 80/100
+- added Friday release-review dashboard handoffs that link completion, TODO, changelog, visual targets, export history, and dashboard files
+- completed Friday Dashboard Runtime Wiring at 100/100 and listed Friday Dashboard Product UI Wiring as the next set
+- opened Friday Dashboard Product UI Wiring at 20/100
+- added `flow --friday-dashboard-product-ui` / `--friday-dashboard-product-ui-json` to bind dashboard panel JSON into the visible Friday dashboard route contract
+- advanced Friday Dashboard Product UI Wiring to 40/100
+- added safe dashboard button state metadata with local-only commands, loading labels, disabled reasons, confirmation flags, and error labels
+- advanced Friday Dashboard Product UI Wiring to 60/100
+- added product UI bindings for dashboard history trends, latest/previous scores, missing screenshot prompts, and capture commands
+- advanced Friday Dashboard Product UI Wiring to 80/100
+- added grouped release-review link bindings for TODO, changelog, visual targets, dashboard history, completion, summary, and manifest artifacts
+- advanced Friday Dashboard Product UI Wiring to 100/100
+- added `flow --friday-dashboard-product-ui-smoke` / `--friday-dashboard-product-ui-smoke-json` to verify the visible dashboard route source, panel JSON binding, cards, local actions, history/release links, and screenshot prompts
+- completed Friday Dashboard Product UI Wiring at 100/100 and listed Friday Dashboard Visible UI Execution as the next set
+- opened Friday Dashboard Visible UI Execution at 20/100
+- added a typed browser-extension dashboard section that renders Friday dashboard cards from `FlowDashboardProductUiBinding`
+- advanced Friday Dashboard Visible UI Execution to 40/100
+- added visible dashboard action buttons with typed local commands plus idle, loading, success, error, disabled, and aria states
+- advanced Friday Dashboard Visible UI Execution to 60/100
+- added visible dashboard rails for export history deltas, release-review artifact links, and screenshot capture prompts
+- advanced Friday Dashboard Visible UI Execution to 80/100
+- added `npm run smoke:dashboard` for a focused TypeScript dashboard section smoke check without a full extension build
+- advanced Friday Dashboard Visible UI Execution to 100/100
+- added explicit local dashboard JSON import with an offline fallback snapshot label so the visible dashboard no longer presents bundled data as live product state
+- completed Friday Dashboard Visible UI Execution at 100/100 and listed Friday Dashboard Command Execution as the next set
+
+## 2026-04-26
+
+- refocused the repository narrative around standalone Flow instead of the broader sibling-project stack
+- added Flow-only activation profiles with wake aliases, keyboard shortcuts, and model lookup roots
+- added Flow-only always-on runtime profiles for low-end and balanced desktop devices
+- added Flow OS-control policies with explicit safety and consent levels
+- added Flow control approval and audit logging surfaces
+- added OS-aware automatic base-module bootstrap planning with low-end green-tier installs
+- added install-state tracking, tier promotion/demotion policy, and a unified Flow session runtime
+- added onboarding and persistence surfaces for first-run setup and state reloads
+- added a provisional Flow completion tracker for edit-only progress scoring
+- added host contracts and a unified `FlowEngine` orchestration layer for embedding Flow into real hosts
+- added a lifecycle controller for always-on Flow runtime states and transitions
+- added permission planning, audio planning, overlay control, recovery planning, and a bundled host integration surface
+- added native control executors plus overlay/audio presenter contracts for host-driven runtime sync
+- added automation bridge support for selection rewrite and shortcut dispatch flows
+- added a clipboard-backed native automation bridge for desktop fallback selection automation
+- added a file-backed Flow state store and a default host kit for one-step embedding
+- added concrete default overlay and audio runtime adapters for the default host kit
+- added managed wake runtime syncing and host health reporting for the default host kit
+- added live-construction support for the default host kit
+- added live host consent planning for first-run native execution approval flows
+- added managed microphone service, stronger native selection automation, and a runtime supervisor loop
+- added `FlowEmbeddedHost` as a single-object operational embed path
+- added a low-level capture worker path and explicit accessibility runtime state for the embedded host
+- added a configured wake inference worker layer to the default host path
+- wired the experience wake runtime to the real local wake-word detector path under `src/audio/wakeword.rs`
+- added frame-driven wake ingestion through the embedded host, supervisor, host kit, capture worker, and wake worker surfaces
+- upgraded the experience capture worker from state-only tracking to per-frame RMS, speech, and clipping reporting
+- upgraded desktop accessibility state from OS labels to probed full-vs-fallback runtime availability
+- updated the native selection bridge to preserve the clipboard while rewriting selections
+- tightened Flow health reporting around audio-frame readiness, wake-detector fallback, and desktop accessibility fallback
+- added proofing planners for grammar, clarity, citation, fact-check, and plagiarism-screen workflows
+- added editor-assist planning for variable recognition, file tagging, and command-mode hints
+- added command routing that maps typed or spoken intents into safe host action plans
+- added `FlowProductSurface` as a packaged product profile for low-end desktop, balanced desktop, and mobile-oriented hosts
+- added first-class browser runtime planning types, pack catalogs, and execution planning under `src/browser`
+- added the `flow-browser-core` Rust/WASM crate for browser capability detection and execution planning
+- added the shared `extensions/flow-webext` WebExtension shell for Chromium, Firefox, and Safari targets
+- added browserpack specs and example manifests for browser-ready ONNX model distribution
+- hardened browser-pack storage with verified pack states, partial cache recovery, and extension-storage fallback
+- added browser-extension typecheck and release packaging scripts with zip artifacts and SHA-256 checksum files
+- validated the browser path with `cargo check`, `cargo check -p flow-browser-core`, `npm run typecheck`, `npm run build:all`, and `npm run package:all`
+- rewrote the root README and TODO so the active scope now documents Flow core completion work
+- fixed the stale example binaries to match the live `MoonshineSTT`, `LocalLlm`, and `KokoroTTS` APIs
+- made the example binaries opt-in behind the `example-binaries` feature so default `cargo test` stays low-resource
+- added `.cargo/config.toml` with single-job Cargo builds for low-end Windows validation
+- tuned dev and test profiles to disable incremental builds and avoid multi-gigabyte stale caches on weak machines
+- removed the last Rust test warnings from `src/audio/player.rs`
+- validated the full current repo scope with `cargo check`, `cargo test`, `cargo build`, `cargo check -p flow-browser-core`, `cargo check --features example-binaries --examples`, `npm run typecheck`, `npm run build:all`, and `npm run package:all`
+- added `FlowLocalRuntime` as a direct embeddable Rust API for local chat, STT, TTS, transcript cleanup, and full speech round-trips
+- made `LocalLlm::new()` device-aware so low-end devices default to `qwen3-0.6b`
+- added `FlowLocalRuntimeSummary` and `DxFlowRuntime::create_local_runtime()` for host/editor integrations such as a Zed AI panel
+- validated the new local-runtime library surface with `cargo check`, `cargo test`, and `cargo build`
+- rebuilt the browser extension UI into distinct popup, side panel, sidebar, options, and overlay experiences instead of a single generic screen
+- added persisted browser settings, workbench draft state, quick actions, pack management, output actions, and delivery/handoff screens to the shared WebExtension shell
+- added `ZedFlowAdapter` plus Zed-shaped request/response types for Agent Panel, Inline Assistant, edit prediction, and voice-input integration
+- added `DxFlowRuntime::create_zed_adapter()` and `DxFlowRuntime::zed_local_status()` to expose the new Zed-facing integration path
+- validated the Zed-focused local integration surface with the full Rust test suite
+- added `CodexFlowAdapter` plus Codex-shaped request/response types for local tasks, follow-ups, and pull-request review
+- added Codex approval-mode, reasoning-effort, surface, execution-target, browser-context, and attachment metadata so editor and app forks can map Flow to current Codex workflows directly
+- added `DxFlowRuntime::create_codex_adapter()` and `DxFlowRuntime::codex_local_status()` to expose the new Codex-facing integration path
+- validated the Codex-focused local integration surface with `cargo check`, `cargo test`, and `cargo build`
+- added `ZeroClawFlowAdapter` plus ZeroClaw-shaped request/response types for agent, gateway, daemon, channel, and skill-runner flows
+- added ZeroClaw autonomy-level, channel, session, memory, browser, terminal, and tool-policy metadata so local Flow hosts can map to current ZeroClaw workflows directly
+- added `DxFlowRuntime::create_zeroclaw_adapter()` and `DxFlowRuntime::zeroclaw_local_status()` to expose the new ZeroClaw-facing integration path
+- validated the ZeroClaw-focused local integration surface with `cargo check`, `cargo test`, and `cargo build`
+- added a unified `FlowProductionConfig` surface plus `FlowIntegrationTarget` so DX, browser, Zed, Codex, and ZeroClaw hosts can generate consistent production defaults from the current device profile
+- added `DxFlowRuntime::production_config()` and `DxFlowRuntime::production_config_json()` plus a new `--production-config` CLI command for operator-facing config generation
+- added a root GitHub Actions CI workflow that validates the Rust crate, browser core, examples, and browser extension packaging
+# Changelog
+
+## Unreleased
+
+- added a full production-bundle export surface under `src/config`, including:
+  - `FlowProductionBundleManifest`
+  - multi-target config export
+  - validated command matrix capture
+  - browser release artifact capture
+  - `README.txt` delivery summary generation
+- added a release-summary handoff surface under `src/config`, including:
+  - `FlowReleaseSummary`
+  - browser artifact readiness capture
+  - external release task capture
+  - `FLOW_RELEASE_HANDOFF.md` generation
+- added `DxFlowRuntime::all_production_configs()`
+- added `DxFlowRuntime::production_bundle_manifest()`
+- added `DxFlowRuntime::export_production_bundle(...)`
+- added `DxFlowRuntime::release_summary()`
+- added `DxFlowRuntime::export_release_summary(...)`
+- added CLI support for `--export-production-bundle`
+- added CLI support for `--release-summary` and `--export-release-summary`
+- updated docs and release tracking to include the generated production bundle workflow
