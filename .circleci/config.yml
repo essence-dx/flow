@@ -22,6 +22,13 @@ jobs:
             Invoke-WebRequest -Uri "https://win.rustup.rs/x86_64" -OutFile "rustup-init.exe"
             .\rustup-init.exe -y --default-toolchain 1.94.0 --profile minimal
       - run:
+          name: Clone local path dependencies
+          shell: powershell.exe
+          command: |
+            $ErrorActionPreference = "Stop"
+            $env:CIRCLECI_GH_TOKEN = [System.Environment]::GetEnvironmentVariable("CIRCLECI_GH_TOKEN")
+            git clone "https://x-access-token:$env:CIRCLECI_GH_TOKEN@github.com/millercarla211-ctrl/serializer" "..\serializer"
+      - run:
           name: Build Windows release artifacts
           shell: powershell.exe
           command: |
@@ -32,6 +39,7 @@ jobs:
             git config --global url."https://x-access-token:$env:CIRCLECI_GH_TOKEN@github.com/".insteadOf "ssh://git@github.com/"
             $env:CARGO_NET_GIT_FETCH_WITH_CLI = "true"
             cargo build --release
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
             New-Item -ItemType Directory -Path dist -Force | Out-Null
             
             # Rename flow.exe to dx-flow.exe
@@ -67,7 +75,15 @@ jobs:
             $env:GH_TOKEN = [System.Environment]::GetEnvironmentVariable("CIRCLECI_GH_TOKEN")
             $tag = "windows"
             gh release create $tag --repo $env:CIRCLE_PROJECT_USERNAME/$env:CIRCLE_PROJECT_REPONAME --title "Windows Release" --target $env:CIRCLE_SHA1 2>$null; $LASTEXITCODE = 0
-            gh release upload $tag dist\*.zip --repo $env:CIRCLE_PROJECT_USERNAME/$env:CIRCLE_PROJECT_REPONAME --clobber
+            $zipFiles = Get-ChildItem -Path "dist" -Filter "*.zip"
+            if (-not $zipFiles) { Write-Error "No zip files found in dist\"; exit 1 }
+            foreach ($f in $zipFiles) {
+              gh release upload $tag $f.FullName --repo $env:CIRCLE_PROJECT_USERNAME/$env:CIRCLE_PROJECT_REPONAME --clobber
+              if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+            }
+            if (Test-Path "dist\SHA256SUMS.txt") {
+              gh release upload $tag "dist\SHA256SUMS.txt" --repo $env:CIRCLE_PROJECT_USERNAME/$env:CIRCLE_PROJECT_REPONAME --clobber
+            }
 
 workflows:
   release:
