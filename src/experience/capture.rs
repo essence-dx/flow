@@ -101,22 +101,29 @@ impl FlowCaptureWorker for CpalCaptureWorker {
             return;
         }
 
-        use cpal::traits::{DeviceTrait, HostTrait};
-        let host = cpal::default_host();
-        match host.default_input_device() {
-            Some(device) => {
-                self.status.device_name = device
-                    .description()
-                    .ok()
-                    .map(|description| description.name().to_string());
-                if let Ok(config) = device.default_input_config() {
-                    self.status.sample_rate_hz = config.sample_rate();
-                    self.status.channels = config.channels();
+        #[cfg(feature = "audio-input")]
+        {
+            use cpal::traits::{DeviceTrait, HostTrait};
+            let host = cpal::default_host();
+            match host.default_input_device() {
+                Some(device) => {
+                    self.status.device_name = device
+                        .description()
+                        .ok()
+                        .map(|description| description.name().to_string());
+                    if let Ok(config) = device.default_input_config() {
+                        self.status.sample_rate_hz = config.sample_rate();
+                        self.status.channels = config.channels();
+                    }
+                }
+                None => {
+                    self.status.last_error = Some("No default input device found.".to_string());
                 }
             }
-            None => {
-                self.status.last_error = Some("No default input device found.".to_string());
-            }
+        }
+        #[cfg(not(feature = "audio-input"))]
+        {
+            self.status.last_error = Some("audio-input feature not enabled".to_string());
         }
     }
 

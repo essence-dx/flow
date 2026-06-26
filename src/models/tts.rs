@@ -162,11 +162,10 @@ impl KokoroTTS {
         let duration = audio.len() as f64 / 24000.0;
         println!("[TTS] Generated {:.2}s of audio", duration);
 
-        // Save to output.wav in root FIRST
         self.save_wav(&audio, "output.wav")?;
         println!("[TTS] Saved to output.wav");
 
-        // Then play
+        #[cfg(feature = "audio-output")]
         crate::audio::AudioPlayer::play(&audio, 24000)?;
 
         Ok(())

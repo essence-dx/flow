@@ -6,6 +6,7 @@ use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 use anyhow::{Context, Result};
+#[cfg(feature = "audio-input")]
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
 use hf_hub::api::sync::Api;
 use serde_json::Value;
@@ -267,12 +268,19 @@ pub async fn execute(command: Command) -> Result<()> {
             println!("[tts] saved to output.wav");
         }
 
+        #[cfg(feature = "audio-input")]
         Command::Live => {
             run_live_mode().await?;
         }
 
+        #[cfg(feature = "audio-input")]
         Command::Dictate => {
             run_dictation_mode().await?;
+        }
+
+        #[cfg(not(feature = "audio-input"))]
+        Command::Live | Command::Dictate => {
+            anyhow::bail!("Live audio mode requires the 'audio-input' feature")
         }
 
         Command::Interactive => {
@@ -8964,14 +8972,17 @@ impl LiveSessionMode {
     }
 }
 
+#[cfg(feature = "audio-input")]
 async fn run_live_mode() -> Result<()> {
     run_live_session(LiveSessionMode::VoiceRoundTrip).await
 }
 
+#[cfg(feature = "audio-input")]
 async fn run_dictation_mode() -> Result<()> {
     run_live_session(LiveSessionMode::DictateToFocusedInput).await
 }
 
+#[cfg(feature = "audio-input")]
 async fn run_live_session(mode: LiveSessionMode) -> Result<()> {
     let broker = RuntimeBroker::detect();
 
@@ -9066,83 +9077,86 @@ async fn run_live_session(mode: LiveSessionMode) -> Result<()> {
     let speech_buffer = Arc::new(Mutex::new(Vec::<f32>::new()));
     let last_voice_at = Arc::new(Mutex::new(Instant::now()));
 
-    let is_recording_kb = Arc::clone(&is_recording);
-    let should_process_kb = Arc::clone(&should_process);
-    let speech_buffer_kb = Arc::clone(&speech_buffer);
-    let last_voice_at_kb = Arc::clone(&last_voice_at);
-    let allow_bare_hotkeys = mode.allows_bare_hotkeys();
+    #[cfg(feature = "keyboard")]
+    {
+        let is_recording_kb = Arc::clone(&is_recording);
+        let should_process_kb = Arc::clone(&should_process);
+        let speech_buffer_kb = Arc::clone(&speech_buffer);
+        let last_voice_at_kb = Arc::clone(&last_voice_at);
+        let allow_bare_hotkeys = mode.allows_bare_hotkeys();
 
-    std::thread::spawn(move || {
-        use rdev::{Event, EventType, Key, listen};
+        std::thread::spawn(move || {
+            use rdev::{Event, EventType, Key, listen};
 
-        let ctrl_down = Arc::new(AtomicBool::new(false));
-        let shift_down = Arc::new(AtomicBool::new(false));
-        let ctrl_down_cb = Arc::clone(&ctrl_down);
-        let shift_down_cb = Arc::clone(&shift_down);
+            let ctrl_down = Arc::new(AtomicBool::new(false));
+            let shift_down = Arc::new(AtomicBool::new(false));
+            let ctrl_down_cb = Arc::clone(&ctrl_down);
+            let shift_down_cb = Arc::clone(&shift_down);
 
-        let callback = move |event: Event| match event.event_type {
-            EventType::KeyPress(Key::ControlLeft | Key::ControlRight) => {
-                ctrl_down_cb.store(true, Ordering::Relaxed);
-            }
-            EventType::KeyRelease(Key::ControlLeft | Key::ControlRight) => {
-                ctrl_down_cb.store(false, Ordering::Relaxed);
-            }
-            EventType::KeyPress(Key::ShiftLeft | Key::ShiftRight) => {
-                shift_down_cb.store(true, Ordering::Relaxed);
-            }
-            EventType::KeyRelease(Key::ShiftLeft | Key::ShiftRight) => {
-                shift_down_cb.store(false, Ordering::Relaxed);
-            }
-            EventType::KeyPress(Key::Return) if allow_bare_hotkeys => {
-                if !is_recording_kb.load(Ordering::Relaxed) {
-                    if let Ok(mut buffer) = speech_buffer_kb.lock() {
-                        buffer.clear();
-                    }
-                    if let Ok(mut last_voice) = last_voice_at_kb.lock() {
-                        *last_voice = Instant::now();
-                    }
-                    is_recording_kb.store(true, Ordering::Relaxed);
-                    println!("[record] started");
-                    set_terminal_title("Flow - recording");
+            let callback = move |event: Event| match event.event_type {
+                EventType::KeyPress(Key::ControlLeft | Key::ControlRight) => {
+                    ctrl_down_cb.store(true, Ordering::Relaxed);
                 }
-            }
-            EventType::KeyPress(Key::Space)
-                if ctrl_down_cb.load(Ordering::Relaxed)
-                    && shift_down_cb.load(Ordering::Relaxed) =>
-            {
-                let new_state = !is_recording_kb.load(Ordering::Relaxed);
-                if new_state {
-                    if let Ok(mut buffer) = speech_buffer_kb.lock() {
-                        buffer.clear();
-                    }
-                    if let Ok(mut last_voice) = last_voice_at_kb.lock() {
-                        *last_voice = Instant::now();
-                    }
-                    is_recording_kb.store(true, Ordering::Relaxed);
-                    println!("[record] toggled on");
-                    set_terminal_title("Flow - recording");
-                } else {
-                    is_recording_kb.store(false, Ordering::Relaxed);
-                    should_process_kb.store(true, Ordering::Relaxed);
-                    println!("[record] toggled off, processing");
-                    set_terminal_title("Flow - processing");
+                EventType::KeyRelease(Key::ControlLeft | Key::ControlRight) => {
+                    ctrl_down_cb.store(false, Ordering::Relaxed);
                 }
-            }
-            EventType::KeyPress(Key::Space) if allow_bare_hotkeys => {
-                if is_recording_kb.load(Ordering::Relaxed) {
-                    is_recording_kb.store(false, Ordering::Relaxed);
-                    should_process_kb.store(true, Ordering::Relaxed);
-                    println!("[record] stopped, processing");
-                    set_terminal_title("Flow - processing");
+                EventType::KeyPress(Key::ShiftLeft | Key::ShiftRight) => {
+                    shift_down_cb.store(true, Ordering::Relaxed);
                 }
-            }
-            _ => {}
-        };
+                EventType::KeyRelease(Key::ShiftLeft | Key::ShiftRight) => {
+                    shift_down_cb.store(false, Ordering::Relaxed);
+                }
+                EventType::KeyPress(Key::Return) if allow_bare_hotkeys => {
+                    if !is_recording_kb.load(Ordering::Relaxed) {
+                        if let Ok(mut buffer) = speech_buffer_kb.lock() {
+                            buffer.clear();
+                        }
+                        if let Ok(mut last_voice) = last_voice_at_kb.lock() {
+                            *last_voice = Instant::now();
+                        }
+                        is_recording_kb.store(true, Ordering::Relaxed);
+                        println!("[record] started");
+                        set_terminal_title("Flow - recording");
+                    }
+                }
+                EventType::KeyPress(Key::Space)
+                    if ctrl_down_cb.load(Ordering::Relaxed)
+                        && shift_down_cb.load(Ordering::Relaxed) =>
+                {
+                    let new_state = !is_recording_kb.load(Ordering::Relaxed);
+                    if new_state {
+                        if let Ok(mut buffer) = speech_buffer_kb.lock() {
+                            buffer.clear();
+                        }
+                        if let Ok(mut last_voice) = last_voice_at_kb.lock() {
+                            *last_voice = Instant::now();
+                        }
+                        is_recording_kb.store(true, Ordering::Relaxed);
+                        println!("[record] toggled on");
+                        set_terminal_title("Flow - recording");
+                    } else {
+                        is_recording_kb.store(false, Ordering::Relaxed);
+                        should_process_kb.store(true, Ordering::Relaxed);
+                        println!("[record] toggled off, processing");
+                        set_terminal_title("Flow - processing");
+                    }
+                }
+                EventType::KeyPress(Key::Space) if allow_bare_hotkeys => {
+                    if is_recording_kb.load(Ordering::Relaxed) {
+                        is_recording_kb.store(false, Ordering::Relaxed);
+                        should_process_kb.store(true, Ordering::Relaxed);
+                        println!("[record] stopped, processing");
+                        set_terminal_title("Flow - processing");
+                    }
+                }
+                _ => {}
+            };
 
-        if let Err(error) = listen(callback) {
-            eprintln!("[error] keyboard listener: {:?}", error);
-        }
-    });
+            if let Err(error) = listen(callback) {
+                eprintln!("[error] keyboard listener: {:?}", error);
+            }
+        });
+    }
 
     let is_recording_audio = Arc::clone(&is_recording);
     let should_process_audio = Arc::clone(&should_process);

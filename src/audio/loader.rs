@@ -22,37 +22,41 @@ impl AudioLoader {
     }
 
     fn load_mp3(path: &Path) -> Result<Vec<f32>> {
-        use rodio::{Decoder, Source};
-        use std::fs::File;
-        use std::io::BufReader;
+        #[cfg(feature = "audio-output")]
+        {
+            use rodio::{Decoder, Source};
+            use std::fs::File;
+            use std::io::BufReader;
 
-        let file = File::open(path).context("Failed to open MP3 file")?;
-        let source = Decoder::new(BufReader::new(file)).context("Failed to decode MP3")?;
+            let file = File::open(path).context("Failed to open MP3 file")?;
+            let source = Decoder::new(BufReader::new(file)).context("Failed to decode MP3")?;
 
-        let sample_rate = source.sample_rate().get();
-        let channels = source.channels().get();
+            let sample_rate = source.sample_rate().get();
+            let channels = source.channels().get();
 
-        // Collect all samples
-        let samples: Vec<f32> = source.collect();
+            let samples: Vec<f32> = source.collect();
 
-        // Convert stereo to mono if needed
-        let mono_samples = if channels == 2 {
-            samples
-                .chunks(2)
-                .map(|chunk| (chunk[0] + chunk.get(1).unwrap_or(&0.0)) / 2.0)
-                .collect()
-        } else {
-            samples
-        };
+            let mono_samples = if channels == 2 {
+                samples
+                    .chunks(2)
+                    .map(|chunk| (chunk[0] + chunk.get(1).unwrap_or(&0.0)) / 2.0)
+                    .collect()
+            } else {
+                samples
+            };
 
-        // Resample to 16kHz if needed
-        let resampled = if sample_rate != 16000 {
-            Self::resample(&mono_samples, sample_rate, 16000)
-        } else {
-            mono_samples
-        };
+            let resampled = if sample_rate != 16000 {
+                Self::resample(&mono_samples, sample_rate, 16000)
+            } else {
+                mono_samples
+            };
 
-        Ok(resampled)
+            Ok(resampled)
+        }
+        #[cfg(not(feature = "audio-output"))]
+        {
+            Err(anyhow::anyhow!("MP3 decoding not available (audio-output feature disabled)"))
+        }
     }
 
     fn load_wav(path: &Path) -> Result<Vec<f32>> {

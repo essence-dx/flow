@@ -15,9 +15,12 @@ members = ["crates/flow-browser-core"]
 exclude = ["serializer", "providers", "forge", "metasearch", "rlm"]
 
 [features]
-default = []
+default = ["audio-input", "audio-output", "keyboard"]
 example-binaries = []
 sherpa-stt = ["dep:sherpa-onnx"]
+audio-input = ["dep:cpal"]
+audio-output = ["dep:rodio"]
+keyboard = ["dep:rdev"]
 
 [dependencies]
 # Async Runtime (Latest: 1.50.0 as of March 2026)
@@ -31,8 +34,8 @@ ndarray = "0.17"
 
 # Audio Processing & FFT
 hound = "3.5"
-rodio = "0.22"
-cpal = "0.17"
+rodio = { version = "0.22", optional = true }
+cpal = { version = "0.17", optional = true }
 rustfft = "6.2"
 
 # Serialization
@@ -59,12 +62,12 @@ audioadapter-buffers = "3.0.0"
 transcribe-rs = { version = "0.3.10", default-features = false, features = ["onnx"] }
 audio-gate = "0.2.0"
 sherpa-onnx = { version = "1.13.1", optional = true }
-rdev = "0.5.3"
+rdev = { version = "0.5.3", optional = true }
 memmap2 = "0.9.10"
 rkyv = { version = "0.8.16", features = ["bytecheck"] }
 sha2 = "0.11.0"
 hex = "0.4.3"
-hf-hub = "0.5.0"
+hf-hub = { version = "0.5.0", default-features = false, features = ["ureq", "rustls-tls", "tokio"] }
 harper-core = { version = "2.0.0", default-features = false }
 serializer = { package = "dx-serializer", version = "0.1.0", path = "../serializer", default-features = false, features = ["converters", "serde_json"] }
 
