@@ -29,7 +29,7 @@ jobs:
           path: ${{ env.PARENT }}/serializer
       - uses: dtolnay/rust-toolchain@stable
       - name: Install system deps (ALSA, X11)
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq libasound2-dev libx11-dev
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq libasound2-dev libx11-dev libxi-dev libxext-dev libxtst-dev libxrandr-dev libxrender-dev
       - uses: Swatinem/rust-cache@v2
       - name: Build
         run: cargo build --release -j 8
@@ -56,7 +56,7 @@ jobs:
           path: ${{ env.PARENT }}/serializer
       - uses: dtolnay/rust-toolchain@stable
       - name: Install system deps (ALSA, X11)
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq libasound2-dev libx11-dev
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq libasound2-dev libx11-dev libxi-dev libxext-dev libxtst-dev libxrandr-dev libxrender-dev
       - uses: Swatinem/rust-cache@v2
       - name: Build
         run: cargo build --release -j 8
@@ -65,16 +65,38 @@ jobs:
           name: dx-flow-linux-aarch64
           path: ${{ env.PARENT }}/flow/target/release/flow
 
-  macos:
-    name: macOS (${{ matrix.target }})
+  macos-aarch64:
+    name: macOS ARM64
     runs-on: blacksmith-6vcpu-macos-latest
     defaults:
       run:
         working-directory: ${{ env.PARENT }}/flow
-    strategy:
-      fail-fast: false
-      matrix:
-        target: [x86_64-apple-darwin, aarch64-apple-darwin]
+    steps:
+      - name: Checkout flow
+        uses: actions/checkout@v4
+        with:
+          path: ${{ env.PARENT }}/flow
+      - name: Checkout serializer (path dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: essence-dx/serializer
+          path: ${{ env.PARENT }}/serializer
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build (native aarch64)
+        run: cargo build --release -j 8
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dx-flow-aarch64-apple-darwin
+          path: ${{ env.PARENT }}/flow/target/release/flow
+
+  macos-x86_64:
+    name: macOS Intel (x86_64)
+    runs-on: blacksmith-6vcpu-macos-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PARENT }}/flow
+    continue-on-error: true
     steps:
       - name: Checkout flow
         uses: actions/checkout@v4
@@ -87,11 +109,16 @@ jobs:
           path: ${{ env.PARENT }}/serializer
       - uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.target }}
+          targets: x86_64-apple-darwin
       - uses: Swatinem/rust-cache@v2
-      - name: Build for ${{ matrix.target }}
-        run: cargo build --release -j 8 --target ${{ matrix.target }}
+      - name: Install onnxruntime via brew (for system link)
+        run: brew install onnxruntime
+        continue-on-error: true
+      - name: Build for x86_64-apple-darwin
+        run: |
+          export ORT_DYLIB_PATH=$(brew --prefix onnxruntime)/lib/libonnxruntime.dylib
+          cargo build --release -j 8 --target x86_64-apple-darwin
       - uses: actions/upload-artifact@v4
         with:
-          name: dx-flow-${{ matrix.target }}
-          path: ${{ env.PARENT }}/flow/target/${{ matrix.target }}/release/flow
+          name: dx-flow-x86_64-apple-darwin
+          path: ${{ env.PARENT }}/flow/target/x86_64-apple-darwin/release/flow
