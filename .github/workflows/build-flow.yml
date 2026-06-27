@@ -8,13 +8,25 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  PARENT: repo
 
 jobs:
   linux-x86_64:
     name: Linux x64
     runs-on: blacksmith-2vcpu-ubuntu-2404
+    defaults:
+      run:
+        working-directory: ${{ env.PARENT }}/flow
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout flow
+        uses: actions/checkout@v4
+        with:
+          path: ${{ env.PARENT }}/flow
+      - name: Checkout serializer (path dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: essence-dx/serializer
+          path: ${{ env.PARENT }}/serializer
       - uses: dtolnay/rust-toolchain@stable
       - name: Install system deps (ALSA, X11)
         run: sudo apt-get update -qq && sudo apt-get install -y -qq libasound2-dev libx11-dev
@@ -24,13 +36,24 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dx-flow-linux-x86_64
-          path: target/release/flow
+          path: ${{ env.PARENT }}/flow/target/release/flow
 
   linux-aarch64:
     name: Linux ARM64
     runs-on: blacksmith-2vcpu-ubuntu-2404-arm
+    defaults:
+      run:
+        working-directory: ${{ env.PARENT }}/flow
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout flow
+        uses: actions/checkout@v4
+        with:
+          path: ${{ env.PARENT }}/flow
+      - name: Checkout serializer (path dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: essence-dx/serializer
+          path: ${{ env.PARENT }}/serializer
       - uses: dtolnay/rust-toolchain@stable
       - name: Install system deps (ALSA, X11)
         run: sudo apt-get update -qq && sudo apt-get install -y -qq libasound2-dev libx11-dev
@@ -40,17 +63,28 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dx-flow-linux-aarch64
-          path: target/release/flow
+          path: ${{ env.PARENT }}/flow/target/release/flow
 
   macos:
     name: macOS (${{ matrix.target }})
     runs-on: blacksmith-6vcpu-macos-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PARENT }}/flow
     strategy:
       fail-fast: false
       matrix:
         target: [x86_64-apple-darwin, aarch64-apple-darwin]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout flow
+        uses: actions/checkout@v4
+        with:
+          path: ${{ env.PARENT }}/flow
+      - name: Checkout serializer (path dependency)
+        uses: actions/checkout@v4
+        with:
+          repository: essence-dx/serializer
+          path: ${{ env.PARENT }}/serializer
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
@@ -60,4 +94,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dx-flow-${{ matrix.target }}
-          path: target/${{ matrix.target }}/release/flow
+          path: ${{ env.PARENT }}/flow/target/${{ matrix.target }}/release/flow
