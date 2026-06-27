@@ -55,7 +55,8 @@ tiktoken-rs = "0.9"
 # CLI Detection
 atty = "0.2"
 tokenizers = "0.22.2"
-ort = { version = "2.0.0-rc.12", features = ["download-binaries", "copy-dylibs"] }
+ort = { version = "=2.0.0-rc.12", default-features = false, features = ["std", "ndarray", "alternative-backend"] }
+ort-tract = "0.3.0+0.22"
 ndarray-npy = "0.10.0"
 rubato = "2.0.0"
 audioadapter-buffers = "3.0.0"
