@@ -1,0 +1,63 @@
+name: Build dx-flow (Linux & macOS)
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  linux-x86_64:
+    name: Linux x64
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install system deps (ALSA, X11)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq libasound2-dev libx11-dev
+      - uses: Swatinem/rust-cache@v2
+      - name: Build
+        run: cargo build --release -j 8
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dx-flow-linux-x86_64
+          path: target/release/flow
+
+  linux-aarch64:
+    name: Linux ARM64
+    runs-on: blacksmith-2vcpu-ubuntu-2404-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install system deps (ALSA, X11)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq libasound2-dev libx11-dev
+      - uses: Swatinem/rust-cache@v2
+      - name: Build
+        run: cargo build --release -j 8
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dx-flow-linux-aarch64
+          path: target/release/flow
+
+  macos:
+    name: macOS (${{ matrix.target }})
+    runs-on: blacksmith-6vcpu-macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [x86_64-apple-darwin, aarch64-apple-darwin]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+      - name: Build for ${{ matrix.target }}
+        run: cargo build --release -j 8 --target ${{ matrix.target }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dx-flow-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/flow
